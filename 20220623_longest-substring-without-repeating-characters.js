@@ -2,7 +2,6 @@ var lengthOfLongestSubstring = function(s) {
     var max_len = 0, used=[], used_idx = [], substr = "";
     
     [...s].forEach(function(c, i){
-        var idx = c.charCodeAt(0);
         
         // 반복되지 않은 문자일 경우 (used List에 미존재)
         if(used.indexOf(c) == -1){
