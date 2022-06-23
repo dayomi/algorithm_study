@@ -4,13 +4,14 @@ var lengthOfLongestSubstring = function(s) {
     [...s].forEach(function(c, i){
         var idx = c.charCodeAt(0);
         
-        // 기존에 반복되지 않은 문자일 경우
+        // 반복되지 않은 문자일 경우 (used List에 미존재)
         if(used.indexOf(c) == -1){
             used.push(c);               // used List 에 넣음
             used_idx[c] = i;            // used idx List에 넣음
             substr += c ;               // substr 생성
         }
-        // 기존에 반복된 문자가 나올 경우
+        
+        // 반복된 문자일 경우 (used List에 존재)
         else{
             max_len = max_len > substr.length ? max_len : substr.length;    // 지금까지의 substr length 계산
   
