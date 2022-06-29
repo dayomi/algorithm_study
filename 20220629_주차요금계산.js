@@ -12,28 +12,26 @@ function solution(fees, records) {
             if(car[record[1]] == null)
                 car[record[1]] = 0;
             // 입차시간 기록
-            parking[record[1]] = new Log(record[0]);
+            parking[record[1]] = new Log(Number(record[0].split(':')[0])*60 + Number(record[0].split(':')[1]));
         }else{
             // 누적시간 기록
-            car[record[1]] +=(Number(record[0].split(':')[0])*60 + Number(record[0].split(':')[1]))
-                - (Number(parking[record[1]].intime.split(':')[0])*60 + Number(parking[record[1]].intime.split(':')[1]));
+            car[record[1]] += (Number(record[0].split(':')[0])*60 + Number(record[0].split(':')[1]))
+                              - parking[record[1]].intime;
             delete parking[record[1]];
         }
     });
     
     // 출차 하지 않아서 23:59분으로 계산할 것 계산
     Object.keys(parking).forEach((c)=>{
-        var intime = parking[c].intime;
-        car[c] += (23*60 + 59) - (Number(intime.split(':')[0]*60) + Number(intime.split(':')[1]))
+        car[c] += (23*60 + 59) - parking[c].intime;
         delete parking[c];
     })
     
     // 비용 계산 후 answer에 입력
     var carList = Object.keys(car).sort();
     carList.forEach((c)=>{
-        var using_time = car[c];
-        var totalfee =  using_time <= base_time ? base_fee : 
-                        base_fee + Math.ceil((using_time - base_time) / unit_time) * unit_fee;
+        var totalfee =  car[c] <= base_time ? 
+                        base_fee : base_fee + Math.ceil((car[c] - base_time) / unit_time) * unit_fee;
         answer.push(totalfee);
     });
     
