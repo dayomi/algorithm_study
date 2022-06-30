@@ -1,3 +1,4 @@
+// https://programmers.co.kr/learn/courses/30/lessons/12980
 function solution(n)
 {
     var ans = 0;
