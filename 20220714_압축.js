@@ -14,7 +14,7 @@
             var idx = dictionary.indexOf(temp);
             if(-1 != idx){ // 사전에 있는지 확인
                 answer.push(idx+1);
-                var newdict = msg.substring(i, j+1);
+                var newdict = msg.substring(i, j+1); // 사전에 신규 추가 
                 dictionary.push(newdict);
                 i = j-1; // 다음 시작 위치 지정
             }
