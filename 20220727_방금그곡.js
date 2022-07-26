@@ -9,7 +9,7 @@ function solution(m, musicinfos) {
         var startHour = Number(info[0].split(':')[0]), endHour = Number(info[1].split(':')[0]),
             startMin = Number(info[0].split(':')[1]), endMin = Number(info[1].split(':')[1])
         // 이부분 추가해서 통과함.. 문제 완전 더러움..
-        endHour = endHour == 0 && startHour == 23 ? 24 : endHour;
+        endHour = endHour == 0 && endHour != startHour? 24 : endHour;
         
         var playTime = (endHour - startHour) * 60 + (endMin - startMin); // 음악재생시간 계산
         var scorel = makeList(score); // 악보 배열
@@ -24,6 +24,8 @@ function solution(m, musicinfos) {
             matchPt = playTime;
         }
     });
+    
+    return answer;
     
     function makeList(str){ // '#'음을 붙여서 음 배열 만드는 함수
         var list = [];
@@ -50,6 +52,4 @@ function solution(m, musicinfos) {
         }
         return false;
     }
-    
-    return answer;
 }
